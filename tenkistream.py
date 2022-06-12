@@ -45,14 +45,19 @@ class LossHistory(keras.callbacks.Callback):
     def on_epoch_end(self, batch, logs=None):
         keys = list(logs.keys())
         global prog
-        prog+=8
-        progress_bar.progress(prog)
+        if prog<100:
+            prog+=8
+            progress_bar.progress(prog)
     
     def on_train_batch_end(self, epoch, logs=None):
         keys = list(logs.keys())
         global subprog
-        subprog+=1
-        subprog_bar.progress(subprog)
+        if subprog<100:
+            subprog+=1
+            subprog_bar.progress(subprog)
+        elif subprog==100:
+            subprog=0
+            subprog_bar.progress(subprog)
     
 
 #スクレイピングからデータフレームの作成まで
