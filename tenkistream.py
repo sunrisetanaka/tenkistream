@@ -37,6 +37,9 @@ def main():
         st.success("最低気温:{}".format(bot))
         st.success("平均気温:{}".format(mid))
         st.success("最高気温:{}".format(top))
+        progress_bar.progress(0)
+        subprog_bar.progress(0)
+
     else:
         st.write("待機中")
 
@@ -45,7 +48,7 @@ class LossHistory(keras.callbacks.Callback):
     def on_epoch_end(self, batch, logs=None):
         keys = list(logs.keys())
         global prog
-        if prog<100:
+        if prog<92:
             prog+=8
             progress_bar.progress(prog)
     
@@ -491,7 +494,7 @@ def ml(df,nowdf):
     top*=norm_scale1
     bot=pred[2]
     bot*=norm_scale1
-    print("平均気温:{} 最高気温:{} 最低気温:{}".format(mid,top,bot))
+    return mid,top,bot
     
 
 
