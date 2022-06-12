@@ -1,0 +1,9 @@
+requests
+BeautifulSoup4
+numpy
+pandas
+matplotlib==3.5.2
+sklearn
+keras
+tensorflow
+streamlit
