@@ -313,11 +313,18 @@ def scrap_df_now():
         monthdict["日"].append(i)
 
     #データ加工(最後2つだけdelete)
-    for i in range(2):
-        monthdict["年"].pop()
-        monthdict["月"].pop()
-        monthdict["日"].pop()
+    if monthdict["日"][-2]!=date_now:
+        for i in range(1):
+            monthdict["年"].pop(2)
+            monthdict["月"].pop(2)
+            monthdict["日"].pop(2)
+    else:
+        for i in range(1):
+            monthdict["年"].pop(1)
+            monthdict["月"].pop(1)
+            monthdict["日"].pop(1)
 
+    
     #他も詰め込む　(pop)でデータの加工も
     for i in monthdata[6::21]:
         monthdict["平均気温"].append(i)
@@ -336,6 +343,7 @@ def scrap_df_now():
     monthdict["最低気温"].pop()
     monthdict["日照時間"].pop()
     
+    print(monthdict)
     
     #データフレーム作成
     nowdf=pd.DataFrame(monthdict)
